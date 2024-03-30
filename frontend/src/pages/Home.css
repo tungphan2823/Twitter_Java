@@ -1,0 +1,10 @@
+.homePage {
+  display: flex;
+}
+.leftSide {
+  border-right: 2px solid rgb(56, 68, 77);
+}
+
+.divider {
+  border-bottom: 2px solid rgb(56, 68, 77);
+}

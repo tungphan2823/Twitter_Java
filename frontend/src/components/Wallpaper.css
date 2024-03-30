@@ -1,0 +1,37 @@
+.profile {
+  position: relative;
+  width: 100%;
+  height: 400px;
+}
+
+.wallpaper {
+  background-image: url("https://livekortti.fi/pl/helldivers-2-pc-68286.jpg");
+  background-size: cover;
+  width: 540px;
+  height: 200px;
+}
+
+.avatar {
+  position: absolute;
+  bottom: 150px; /* Adjust to control the overlap */
+  left: 20px; /* Adjust to control the position */
+  width: 100px; /* Adjust size as needed */
+  height: 100px; /* Adjust size as needed */
+  border-radius: 50%; /* For circular avatar */
+  border: 2px solid #fff; /* Optional: add border */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Optional: add shadow */
+}
+.information {
+  padding-top: 4rem;
+  padding-left: 1rem;
+  padding-bottom: 1rem;
+  
+
+}
+.buttonEdit {
+  position: absolute;
+  font-weight: bold;
+  border-radius: 2rem;
+  padding: 0.5rem;
+  right: 20px; 
+}
