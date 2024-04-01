@@ -14,19 +14,20 @@ const SidebarData = [
       },
   {
     title: "Home",
-    link: "/",
+    link: "",
     icon: <HomeIcon />,
   },
   {
     title: "Notification",
-    link: "/notification",
+    link: "notification",
     icon: <NotificationsIcon />,
   },
   {
     title: "Profile",
-    link: "/profile",
+    link: "profile",
     icon: <PersonIcon />,
   },
+  
   { title: "Logout", icon: <LogoutIcon /> },
 ];
 const Sidebar = () => {

@@ -14,7 +14,7 @@ import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 import Check from "@mui/icons-material/Check";
 import Avatar from "@mui/joy/Avatar";
 
-export default function ExampleTextareaComment() {
+export default function ExampleTextareaComment(tweet) {
   const [italic, setItalic] = React.useState(false);
   const [fontWeight, setFontWeight] = React.useState("normal");
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -81,7 +81,7 @@ export default function ExampleTextareaComment() {
             </Box>
           }
           sx={{
-            minWidth: 500,
+            minWidth: 470,
             fontWeight,
             fontStyle: italic ? "italic" : "initial",
             backgroundColor: "rgb(21,32,43)",

@@ -6,6 +6,7 @@ import RootPage from "./pages/Root";
 import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
 import LoginPage from "./pages/Login";
 import { AppProvider } from "./lib/App-context";
+import TweetPage from "./pages/Tweet";
 const router = createBrowserRouter([
   {
     path: "/login",
@@ -26,6 +27,11 @@ const router = createBrowserRouter([
       {
         path: "notification",
         element: <NotificationPage />,
+      },
+     
+      {
+        path: ":userId/:tweetId",
+        element: <TweetPage />,
       },
     ],
   },

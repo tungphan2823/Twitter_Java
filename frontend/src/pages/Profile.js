@@ -1,5 +1,6 @@
 import Wallpaper from "../components/Wallpaper";
 import "./Profile.css";
+
 import FollowCard from "../components/FollowCard";
 import Post from "../components/Post";
 import { useAppContext } from "../lib/App-context";
@@ -21,6 +22,7 @@ const users = [
   },
   // Add more users as needed
 ];
+
 const ProfilePage = () => {
   const { userTweets } = useAppContext();
   return (
@@ -40,15 +42,19 @@ const ProfilePage = () => {
               }}
             ></div>
           </div>
+
           <div
             style={{
               borderBottom: "2px solid rgb(56,68,77) ",
             }}
           ></div>
         </div>
-        {userTweets.map((tweet, index) => {
-          return <Post key={index} tweet={tweet} />;
-        })}
+        <div>
+          {" "}
+          {userTweets.map((tweet, index) => {
+            return <Post key={index} tweet={tweet} />;
+          })}
+        </div>
       </div>
       <div className="rightSide">
         <div>
