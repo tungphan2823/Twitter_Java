@@ -3,7 +3,9 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ModeCommentIcon from "@mui/icons-material/ModeComment";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import "./Tweet.css";
+import LikeButton from "./Like";
 import CommentFormProps from "./Comment";
+import { useState } from "react";
 function formatTimestamp(timestamp) {
   const options = {
     hour: "numeric",
@@ -20,9 +22,8 @@ const Tweet = ({ tweetData }) => {
   if (!tweetData || !tweetData.user) {
     return null; // or some fallback UI
   }
-  
   const formattedTimestamp = formatTimestamp(tweetData.timestamp);
-
+  const commentUser = tweetData.likes.find((comment) => comment.user_id === 1);
   return (
     <div className="tweetCard">
       <Avatar src={tweetData.user.profilePicture} />
@@ -40,15 +41,14 @@ const Tweet = ({ tweetData }) => {
         <div style={{ color: "rgb(124,136,150)" }}>{formattedTimestamp}</div>
         <div className="iconBar">
           <div className="iconAction">
-            <FavoriteBorderIcon />
-            <p>{tweetData.likes.length}</p>
+            <LikeButton  TweetLike={tweetData.likes.length}  TweetComment={commentUser} TweetId={tweetData.userId}/>
           </div>
           <div className="iconAction">
             <ModeCommentIcon />
             <p>{tweetData.comments.length}</p>
           </div>
           <div className="iconAction">
-            <VisibilityIcon />
+            <VisibilityIcon  />
             <p>10</p>
           </div>
         </div>

@@ -22,19 +22,19 @@ public class UserController {
     public UserController(UserRepo userRepo) {
         this.userRepo = userRepo;
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping
     public List<User> getAllUsers() {
         return userRepo.findAll();
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{id}")
     public ResponseEntity<User> getOneUser(@PathVariable Long id) {
         User user = userRepo.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
         return ResponseEntity.ok(user);
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
         User user = userRepo.findById(id)
@@ -43,7 +43,6 @@ public class UserController {
         user.setUsername(updatedUser.getUsername());
         user.setEmail(updatedUser.getEmail());
         user.setPassword(updatedUser.getPassword());
-        
         user.setProfilePicture(updatedUser.getProfilePicture());
         user.setDayJoined(updatedUser.getDayJoined()); // Set day joined
         user.setFirstName(updatedUser.getFirstName()); // Set first name
@@ -52,7 +51,7 @@ public class UserController {
         User savedUser = userRepo.save(user);
         return ResponseEntity.ok(savedUser);
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping
     public ResponseEntity<User> addNewUser(@RequestBody User user) {
         User savedUser = userRepo.save(user);

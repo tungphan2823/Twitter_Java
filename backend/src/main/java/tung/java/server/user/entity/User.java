@@ -1,11 +1,15 @@
 package tung.java.server.user.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import tung.java.server.tweet.entity.Tweet;
 
 @Entity
 @Table(name = "users", schema = "public")
@@ -30,6 +34,9 @@ public class User {
 	    public java.sql.Date getDayJoined() {
 		return dayJoined;
 	}
+	    
+	   
+	    
 	public void setDayJoined(java.sql.Date dayJoined) {
 		this.dayJoined = dayJoined;
 	}
@@ -77,8 +84,6 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
 	public String getProfilePicture() {
 		return profilePicture;
 	}

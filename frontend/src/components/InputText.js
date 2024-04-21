@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Box from "@mui/joy/Box";
 import Button from "@mui/joy/Button";
 import FormControl from "@mui/joy/FormControl";
@@ -14,24 +14,58 @@ import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 import Check from "@mui/icons-material/Check";
 import Avatar from "@mui/joy/Avatar";
 
-export default function ExampleTextareaComment(tweet) {
-  const [italic, setItalic] = React.useState(false);
-  const [fontWeight, setFontWeight] = React.useState("normal");
-  const [anchorEl, setAnchorEl] = React.useState(null);
+export default function ExampleTextareaComment() {
+  const [italic, setItalic] = useState(false);
+  const [fontWeight, setFontWeight] = useState("normal");
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [content, setContent] = useState("");
+
+  const generateRandomId = () => {
+    return Math.floor(Math.random() * 1000000); // Adjust range as needed
+  };
+
+  const handlePost = () => {
+    const tweetId = generateRandomId(); // Generate random tweetId
+    const userId = 1;
+    const tweet = {
+      tweetId,
+      content,
+      timestamp: new Date().toISOString(),
+      userId,
+    };
+
+    fetch("http://localhost:8080/tweets", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(tweet),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Tweet posted:", data);
+      })
+      .catch((error) => {
+        console.error("Error posting tweet:", error);
+      });
+  };
+
   return (
     <FormControl>
-      <div style={{display: 'flex'}}>
+      <div style={{ display: "flex" }}>
         <Avatar />
         <Textarea
           placeholder="What is happening?!"
           minRows={3}
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
           endDecorator={
             <Box
               sx={{
                 display: "flex",
                 gap: "var(--Textarea-paddingBlock)",
                 pt: "var(--Textarea-paddingBlock)",
-                
+
                 flex: "auto",
               }}
             >
@@ -77,7 +111,9 @@ export default function ExampleTextareaComment(tweet) {
               >
                 <FormatItalic />
               </IconButton>
-              <Button sx={{ ml: "auto" }}>Post</Button>
+              <Button sx={{ ml: "auto" }} onClick={handlePost}>
+                Post
+              </Button>
             </Box>
           }
           sx={{

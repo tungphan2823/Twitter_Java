@@ -1,7 +1,7 @@
 package tung.java.server.tweet.controller;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +31,10 @@ public class TweetController {
     @GetMapping("/tweets")
     public List<Tweet> getAllTweets() {
         List<Tweet> tweets = tweetRepository.findAll();
-        tweets.forEach(tweet -> tweet.getUser());  // Load the user of each tweet
+        tweets.forEach(tweet -> {
+            tweet.getUser();  // Load the user of each tweet
+            tweet.getLikes().size();  // Load the number of likes of each tweet
+        });
         return tweets;
     }
 
@@ -48,19 +51,33 @@ public class TweetController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/tweets/{userId}/{tweetId}")
+    public ResponseEntity<Tweet> getTweetByUserAndId(@PathVariable int userId, @PathVariable int tweetId) {
+        Optional<Tweet> tweetOptional = tweetRepository.findById(tweetId);
+        if (tweetOptional.isPresent()) {
+            Tweet tweet = tweetOptional.get();
+            if (tweet.getUserId() != userId) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            } else {
+                return new ResponseEntity<>(tweet, HttpStatus.OK);
+            }
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("/tweets/{userId}")
     public ResponseEntity<?> updateTweet( @RequestBody Tweet updatedTweet, @PathVariable int userId) {
         return tweetRepository.findById(updatedTweet.getTweetId())
                 .map(tweet -> {
-                    if( tweet.getUserId() != userId) {
-                        return new ResponseEntity<>("Unauthenticated",HttpStatus.UNAUTHORIZED);
-                    }
                     tweet.setContent(updatedTweet.getContent());
                     tweetRepository.save(updatedTweet);
                     return ResponseEntity.ok(tweet);
                 })
                 .orElseThrow(() -> new TweetNotFoundException(updatedTweet.getTweetId()));
     }
+
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/tweets")

@@ -6,6 +6,7 @@ import ExampleTextareaComment from "../components/InputText";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Comment from "../components/Comment";
+import CommentInput from "../components/CommentInput";
 const users = [
   {
     username: "markiplier",
@@ -48,16 +49,21 @@ const TweetPage = () => {
 
     fetchStudentCourses();
   }, [params.userId, params.tweetId]);
-  console.log(tweetData.comments);
+  console.log(tweetData.tweetId);
   return (
     <div className="homePage">
       <div className="leftSide">
         <div style={{ padding: "1rem" }}>Post</div>
         <div className="mainPage" style={{ width: "540px" }}>
           <Tweet tweetData={tweetData} />
-          <div style={{ padding: "1rem", borderBottom:"2px solid rgb(56, 68, 77)"}}>
+          <div
+            style={{
+              padding: "1rem",
+              borderBottom: "2px solid rgb(56, 68, 77)",
+            }}
+          >
             {" "}
-            <ExampleTextareaComment />
+            <CommentInput tweetId={tweetData.tweetId} userId="1"/>
           </div>
           {tweetData.comments &&
             tweetData.comments.map((comment, index) => (

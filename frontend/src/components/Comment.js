@@ -41,36 +41,28 @@ const Comment = ({ comment }) => {
   }, [comment.user_id]);
   return (
     <div className="postCard">
-      <Avatar src={userData.profilePicture} />
-      <div className="postText">
-        <div style={{ display: "flex" }}>
-          <div>
-            {userData.firstName} {userData.lastName}
+      <div className="postDetail">
+        <Avatar src={userData.profilePicture} />
+        <div className="postText">
+          <div style={{ display: "flex" }}>
+            <div>
+              {userData.firstName} {userData.lastName}
+            </div>
+
+            <div style={{ color: "rgb(124,136,150)" }}>
+              @{userData.username}
+            </div>
+            <div style={{ color: "rgb(124,136,150)" }}>
+              {" "}
+              · {formattedTimestamp}
+            </div>
           </div>
 
-          <div style={{ color: "rgb(124,136,150)" }}>@{userData.username}</div>
-          <div style={{ color: "rgb(124,136,150)" }}>
-            {" "}
-            · {formattedTimestamp}
-          </div>
-        </div>
-
-        <div>{comment.comment}</div>
-        <div className="iconBar">
-          <div className="iconAction">
-            <FavoriteBorderIcon />
-            {/* <p>{tweet.likes.length}</p> */}
-          </div>
-          <div className="iconAction">
-            <ModeCommentIcon />
-            {/* <p>{tweet.comments.length}</p> */}
-          </div>
-          <div className="iconAction">
-            <VisibilityIcon />
-            {/* <p>10</p> */}
-          </div>
+          <div>{comment.comment}</div>
         </div>
       </div>
+
+    
     </div>
   );
 };

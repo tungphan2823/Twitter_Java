@@ -29,8 +29,8 @@ function Wallpaper() {
         <div style={{ fontSize: "15px", color: "rgb(124,136,150)" }}>
           @{userData.username}
         </div>
-        <div style={{ fontSize: "15px", color: "rgb(124,136,150)" }}>
-          <CalendarMonthIcon />
+        <div style={{ fontSize: "15px", color: "rgb(124,136,150)" , position:"flex" , justifyContent:"center" }}>
+          <CalendarMonthIcon /> 
           Joined {joinedMonthYear}
         </div>
         <div

@@ -1,6 +1,7 @@
 package tung.java.server.tweet.entity;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import tung.java.server.user.entity.User;
 
@@ -31,6 +33,31 @@ public class Tweet {
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private User user;
+    
+    @OneToMany(mappedBy = "tweet_id")
+    private List<Like> likes;
+    
+    
+    
+    public List<Like> getLikes() {
+        return likes;
+    }
+
+    @OneToMany(mappedBy = "tweet_id")
+    private List<Comment> comments;
+    
+    
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+    
+    public void setLikes(List<Like> likes) {
+        this.likes = likes;
+    }
     
     public User getUser() {
         return user;

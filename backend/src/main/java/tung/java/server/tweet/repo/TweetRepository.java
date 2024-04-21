@@ -8,4 +8,5 @@ import tung.java.server.tweet.entity.Tweet;
 
 public interface TweetRepository extends JpaRepository<Tweet, Integer> {
     List<Tweet> findByUserId(int userId);
+ 
 }

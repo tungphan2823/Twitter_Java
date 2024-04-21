@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-
+  cursor: pointer;
 }
 .postText {
   align-items: center;
@@ -10,15 +10,14 @@
   max-width: 460px;
 }
 .iconBar {
-  display: flex;
-  justify-content: space-between;
   font-size: 10px;
-  color: rgb(139,152,165);
+  color: rgb(139, 152, 165);
 }
 .postCard {
   border-bottom: 2px solid rgb(56, 68, 77);
   font-size: 15px;
   padding: 1rem;
+}
+.postDetail {
   display: flex;
-  
 }
