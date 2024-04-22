@@ -5,6 +5,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import "./Tweet.css";
 import LikeButton from "./Like";
 import CommentFormProps from "./Comment";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 function formatTimestamp(timestamp) {
   const options = {
@@ -28,27 +29,38 @@ const Tweet = ({ tweetData }) => {
     <div className="tweetCard">
       <Avatar src={tweetData.user.profilePicture} />
       <div className="tweetText">
-        <div>
+        <Link
+          to={`/profile/${tweetData.user.id}`}
+          style={{ textDecoration: "none", color: "white" }}
+        >
+          {" "}
           <div>
-            {tweetData.user.firstName} {tweetData.user.lastName}
-          </div>
+            <div>
+              {tweetData.user.firstName} {tweetData.user.lastName}
+            </div>
 
-          <div style={{ color: "rgb(124,136,150)" }}>
-            @{tweetData.user.username}
+            <div style={{ color: "rgb(124,136,150)" }}>
+              @{tweetData.user.username}
+            </div>
           </div>
-        </div>
+        </Link>
+
         <div>{tweetData.content}</div>
         <div style={{ color: "rgb(124,136,150)" }}>{formattedTimestamp}</div>
         <div className="iconBar">
           <div className="iconAction">
-            <LikeButton  TweetLike={tweetData.likes.length}  TweetComment={commentUser} TweetId={tweetData.userId}/>
+            <LikeButton
+              TweetLike={tweetData.likes.length}
+              TweetComment={commentUser}
+              TweetId={tweetData.userId}
+            />
           </div>
           <div className="iconAction">
             <ModeCommentIcon />
             <p>{tweetData.comments.length}</p>
           </div>
           <div className="iconAction">
-            <VisibilityIcon  />
+            <VisibilityIcon />
             <p>10</p>
           </div>
         </div>

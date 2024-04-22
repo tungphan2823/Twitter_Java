@@ -24,7 +24,7 @@ const SidebarData = [
   },
   {
     title: "Profile",
-    link: "profile",
+    link: "profile/1",
     icon: <PersonIcon />,
   },
   

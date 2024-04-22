@@ -2,8 +2,9 @@ import React from "react";
 import "./Wallpaper.css"; // Import CSS file for styling
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { useAppContext } from "../lib/App-context";
-function Wallpaper() {
-  const { userData } = useAppContext();
+import EditDialog from "./DialogEdit";
+function Wallpaper({userData}) {
+  // const { userData } = useAppContext();
   // Convert the date from the database into a JavaScript Date object
   const joinedDate = new Date(userData.dayJoined);
 
@@ -22,14 +23,16 @@ function Wallpaper() {
       />
 
       <div className="information">
-        <button className="buttonEdit">Edit profile</button>
+        
+        <div className="buttonEdit"><EditDialog userData={userData}/></div>
+        
         <div>
           {userData.firstName} {userData.lastName}
         </div>
         <div style={{ fontSize: "15px", color: "rgb(124,136,150)" }}>
           @{userData.username}
         </div>
-        <div style={{ fontSize: "15px", color: "rgb(124,136,150)" , position:"flex" , justifyContent:"center" }}>
+        <div className="date" style={{ fontSize: "15px", color: "rgb(124,136,150)" }}>
           <CalendarMonthIcon /> 
           Joined {joinedMonthYear}
         </div>

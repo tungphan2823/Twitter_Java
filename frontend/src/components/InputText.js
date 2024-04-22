@@ -13,6 +13,7 @@ import FormatItalic from "@mui/icons-material/FormatItalic";
 import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 import Check from "@mui/icons-material/Check";
 import Avatar from "@mui/joy/Avatar";
+import { useAppContext } from "../lib/App-context";
 
 export default function ExampleTextareaComment() {
   const [italic, setItalic] = useState(false);
@@ -49,11 +50,11 @@ export default function ExampleTextareaComment() {
         console.error("Error posting tweet:", error);
       });
   };
-
+  const { userData } = useAppContext();
   return (
     <FormControl>
       <div style={{ display: "flex" }}>
-        <Avatar />
+        <Avatar src={userData.profilePicture} />
         <Textarea
           placeholder="What is happening?!"
           minRows={3}

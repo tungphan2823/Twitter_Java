@@ -1,8 +1,9 @@
 import Wallpaper from "../components/Wallpaper";
 import "./Profile.css";
-
+import { useParams } from "react-router-dom";
 import FollowCard from "../components/FollowCard";
 import Post from "../components/Post";
+import React, { useState, useEffect } from "react";
 import { useAppContext } from "../lib/App-context";
 const users = [
   {
@@ -24,15 +25,49 @@ const users = [
 ];
 
 const ProfilePage = () => {
-  const { userTweets } = useAppContext();
+  const [tweets, setTweets] = useState([]);
+  const [userData, setUserData] = useState([]);
+  const params = useParams();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:8080/tweets/${params.userId}`
+        );
+        const dataTweet = await response.json();
+        setTweets(dataTweet);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchData();
+  }, [params.userId]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:8080/users/${params.userId}`
+        );
+        const dataUser = await response.json();
+        setUserData(dataUser);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchData();
+  }, [params.userId]);
+  // const { userTweets } = useAppContext();
   return (
     <div className="homePage">
       <div className="leftSide">
-        <div style={{ padding: "1rem" }}>Admin123</div>
+        <div style={{ padding: "1rem" }}>{userData.username}</div>
         <div className="mainPage">
           <div className="divider" />
           {/* <div className="wallpaper"> </div> */}
-          <Wallpaper />
+          <Wallpaper userData={userData} />
           <div className="profilePost">
             <div>Post</div>
             <div
@@ -51,7 +86,7 @@ const ProfilePage = () => {
         </div>
         <div>
           {" "}
-          {userTweets.map((tweet, index) => {
+          {tweets.map((tweet, index) => {
             return <Post key={index} tweet={tweet} />;
           })}
         </div>

@@ -13,13 +13,13 @@ import FormatItalic from "@mui/icons-material/FormatItalic";
 import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 import Check from "@mui/icons-material/Check";
 import Avatar from "@mui/joy/Avatar";
-
+import { useAppContext } from "../lib/App-context";
 export default function CommentInput({ userId, tweetId }) {
     const [italic, setItalic] = useState(false);
     const [fontWeight, setFontWeight] = useState("normal");
     const [anchorEl, setAnchorEl] = useState(null);
     const [content, setContent] = useState("");
-  
+    const {userData } = useAppContext();
     const generateRandomId = () => {
       return Math.floor(Math.random() * 1000000); // Adjust range as needed
     };
@@ -53,7 +53,7 @@ export default function CommentInput({ userId, tweetId }) {
     return (
       <FormControl>
         <div style={{ display: "flex" }}>
-          <Avatar />
+        <Avatar src={userData.profilePicture} />
           <Textarea
             placeholder="Some thing here?!"
             minRows={3}

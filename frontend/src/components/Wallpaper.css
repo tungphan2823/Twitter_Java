@@ -5,7 +5,7 @@
 }
 
 .wallpaper {
-  background-image: url("https://livekortti.fi/pl/helldivers-2-pc-68286.jpg");
+  background-image: url("https://t4.ftcdn.net/jpg/05/25/11/11/360_F_525111136_6sZp5DQKBXr53m6MCwdkOVE0rV0Gl67c.jpg");
   background-size: cover;
   width: 540px;
   height: 200px;
@@ -25,13 +25,14 @@
   padding-top: 4rem;
   padding-left: 1rem;
   padding-bottom: 1rem;
-  
-
 }
 .buttonEdit {
   position: absolute;
   font-weight: bold;
   border-radius: 2rem;
   padding: 0.5rem;
-  right: 20px; 
+  right: 20px;
+}
+.date {
+  display: flex;
 }
