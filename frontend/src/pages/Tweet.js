@@ -9,6 +9,7 @@ import Comment from "../components/Comment";
 import CommentInput from "../components/CommentInput";
 import { AppContext } from "../lib/App-context";
 import { useContext } from "react";
+import MenuSelect from "../components/MenuSelect";
 const users = [
   {
     username: "markiplier",
@@ -28,11 +29,10 @@ const users = [
   // Add more users as needed
 ];
 const TweetPage = () => {
-  const {  change } = useContext(AppContext);
+  const { change } = useContext(AppContext);
   const params = useParams();
   const [tweetData, setTweetData] = useState([]);
   useEffect(() => {
-    
     const fetchStudentCourses = async () => {
       try {
         const response = await fetch(
@@ -58,8 +58,10 @@ const TweetPage = () => {
     <div className="homePage">
       <div className="leftSide">
         <div style={{ padding: "1rem" }}>Post</div>
+        
         <div className="mainPage" style={{ width: "540px" }}>
           <Tweet tweetData={tweetData} />
+
           <div
             style={{
               padding: "1rem",
@@ -75,6 +77,7 @@ const TweetPage = () => {
             ))}
         </div>
       </div>
+
       <div className="rightSide">
         <div>
           <FollowCard users={users} />

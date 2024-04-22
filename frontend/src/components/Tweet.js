@@ -7,6 +7,7 @@ import LikeButton from "./Like";
 import CommentFormProps from "./Comment";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import MenuSelect from "./MenuSelect";
 function formatTimestamp(timestamp) {
   const options = {
     hour: "numeric",
@@ -29,22 +30,26 @@ const Tweet = ({ tweetData }) => {
     <div className="tweetCard">
       <Avatar src={tweetData.user.profilePicture} />
       <div className="tweetText">
-        <Link
-          to={`/profile/${tweetData.user.id}`}
-          style={{ textDecoration: "none", color: "white" }}
-        >
-          {" "}
-          <div>
+        <div style={{ display: "flex" }}>
+          <Link
+            to={`/profile/${tweetData.user.id}`}
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            {" "}
             <div>
-              {tweetData.user.firstName} {tweetData.user.lastName}
-            </div>
+              <div>
+                {tweetData.user.firstName} {tweetData.user.lastName}
+              </div>
 
-            <div style={{ color: "rgb(124,136,150)" }}>
-              @{tweetData.user.username}
+              <div style={{ color: "rgb(124,136,150)" }}>
+                @{tweetData.user.username}
+              </div>
             </div>
+          </Link>
+          <div style={{display:"flex", justifyContent:'flex-end', flex: 1}}>
+            <MenuSelect tweetData={tweetData}/>
           </div>
-        </Link>
-
+        </div>
         <div>{tweetData.content}</div>
         <div style={{ color: "rgb(124,136,150)" }}>{formattedTimestamp}</div>
         <div className="iconBar">

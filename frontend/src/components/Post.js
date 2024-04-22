@@ -22,8 +22,12 @@ const Post = ({ tweet }) => {
     <div className="postCard">
       <div className="postDetail">
         <Avatar src={tweet.user.profilePicture} />
+
         <div className="postText">
-          <Link to={`/profile/${tweet.user.id}`} style={{ textDecoration: "none", color: "white" }}>
+          <Link
+            to={`/profile/${tweet.user.id}`}
+            style={{ textDecoration: "none", color: "white" }}
+          >
             <div style={{ display: "flex" }}>
               <div>
                 {tweet.user.firstName} {tweet.user.lastName}

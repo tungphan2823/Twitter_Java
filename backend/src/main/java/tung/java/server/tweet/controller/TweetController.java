@@ -67,17 +67,16 @@ public class TweetController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @PutMapping("/tweets/{userId}")
-    public ResponseEntity<?> updateTweet( @RequestBody Tweet updatedTweet, @PathVariable int userId) {
-        return tweetRepository.findById(updatedTweet.getTweetId())
+    @PutMapping("/tweets/{tweetId}")
+    public ResponseEntity<?> updateTweetById(@RequestBody Tweet updatedTweet, @PathVariable int tweetId) {
+        return tweetRepository.findById(tweetId)
                 .map(tweet -> {
                     tweet.setContent(updatedTweet.getContent());
-                    tweetRepository.save(updatedTweet);
+                    tweetRepository.save(tweet);
                     return ResponseEntity.ok(tweet);
                 })
-                .orElseThrow(() -> new TweetNotFoundException(updatedTweet.getTweetId()));
+                .orElseThrow(() -> new TweetNotFoundException(tweetId));
     }
-
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/tweets")
@@ -85,11 +84,21 @@ public class TweetController {
         return tweetRepository.save(tweet);
     }
 
+//    @CrossOrigin(origins = "http://localhost:3000")
+//    @DeleteMapping("/tweets/{userId}")
+//    public ResponseEntity<Void> deleteTweet(@PathVariable int userId) {
+//        if (tweetRepository.existsById(userId)) {
+//            tweetRepository.deleteById(userId);
+//            return ResponseEntity.ok().build();
+//        } else {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
     @CrossOrigin(origins = "http://localhost:3000")
-    @DeleteMapping("/tweets/{userId}")
-    public ResponseEntity<Void> deleteTweet(@PathVariable int userId) {
-        if (tweetRepository.existsById(userId)) {
-            tweetRepository.deleteById(userId);
+    @DeleteMapping("/tweets/{tweetId}")
+    public ResponseEntity<Void> deleteTweetById(@PathVariable int tweetId) {
+        if (tweetRepository.existsById(tweetId)) {
+            tweetRepository.deleteById(tweetId);
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.notFound().build();
