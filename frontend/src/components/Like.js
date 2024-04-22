@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-
+import { AppContext } from "../lib/App-context";
+import { useContext } from "react";
 const LikeButton = ({ TweetId, TweetLike, TweetComment }) => {
+  const { setChange } = useContext(AppContext);
   const [liked, setLiked] = useState(false);
   useEffect(() => {
     if (TweetComment) {
-      console.log(TweetComment)
+      console.log(TweetComment);
       setLiked(!liked);
     }
   }, []);
@@ -17,12 +19,13 @@ const LikeButton = ({ TweetId, TweetLike, TweetComment }) => {
     try {
       if (liked) {
         // Send a DELETE request to remove the like
-        await fetch("http://localhost:8080/likes/user/1", {
+        await fetch(`http://localhost:8080/likes/1/${TweetId}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
           },
         });
+        setChange((prevChange) => !prevChange);
       } else {
         // Send a POST request to add the like
         await fetch("http://localhost:8080/likes", {
@@ -37,6 +40,7 @@ const LikeButton = ({ TweetId, TweetLike, TweetComment }) => {
             timestamp: new Date().toISOString(),
           }),
         });
+        setChange((prevChange) => !prevChange);
       }
       // Handle success or error response as needed
     } catch (error) {

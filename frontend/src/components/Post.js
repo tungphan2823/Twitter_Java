@@ -4,7 +4,7 @@ import ModeCommentIcon from "@mui/icons-material/ModeComment";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Link } from "react-router-dom";
 import LikeButton from "./Like";
-import { useState, useEffect } from "react";
+
 import "./Post.css";
 function formatTimestamp(timestamp) {
   const options = {

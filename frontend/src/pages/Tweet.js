@@ -7,6 +7,8 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Comment from "../components/Comment";
 import CommentInput from "../components/CommentInput";
+import { AppContext } from "../lib/App-context";
+import { useContext } from "react";
 const users = [
   {
     username: "markiplier",
@@ -26,9 +28,11 @@ const users = [
   // Add more users as needed
 ];
 const TweetPage = () => {
+  const {  change } = useContext(AppContext);
   const params = useParams();
   const [tweetData, setTweetData] = useState([]);
   useEffect(() => {
+    
     const fetchStudentCourses = async () => {
       try {
         const response = await fetch(
@@ -48,7 +52,7 @@ const TweetPage = () => {
     };
 
     fetchStudentCourses();
-  }, [params.userId, params.tweetId]);
+  }, [params.userId, params.tweetId, change]);
   console.log(tweetData.tweetId);
   return (
     <div className="homePage">
@@ -63,7 +67,7 @@ const TweetPage = () => {
             }}
           >
             {" "}
-            <CommentInput tweetId={tweetData.tweetId} userId="1"/>
+            <CommentInput tweetId={tweetData.tweetId} userId="1" />
           </div>
           {tweetData.comments &&
             tweetData.comments.map((comment, index) => (

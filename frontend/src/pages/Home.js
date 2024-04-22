@@ -25,8 +25,8 @@ const users = [
 ];
 
 const HomePage = () => {
-  const { tweets, userData} = useAppContext();
- 
+  const { tweets, userData } = useAppContext();
+
   return (
     <div className="homePage">
       <div className="leftSide">
@@ -34,7 +34,7 @@ const HomePage = () => {
         <div className="mainPage">
           <div className="divider" />
           <div style={{ padding: "1rem" }}>
-            <ExampleTextareaComment tweet={userData.userId}/>
+            <ExampleTextareaComment tweet={userData.userId} />
           </div>
 
           <div className="divider" />

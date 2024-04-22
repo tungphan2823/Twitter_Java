@@ -1,33 +1,24 @@
 package tung.java.server.tweet.controller;
 
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tung.java.server.tweet.entity.Like;
 import tung.java.server.tweet.repo.LikeRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/likes")
 public class LikeController {
 
-    private final LikeRepository likeRepository;
-
-    public LikeController(LikeRepository likeRepository) {
-        this.likeRepository = likeRepository;
-    }
+    @Autowired
+    private LikeRepository likeRepository;
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping
     public List<Like> getAllLikes() {
         return likeRepository.findAll();
-    }
-    @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/{id}")
-    public ResponseEntity<Like> getLikeById(@PathVariable int id) {
-        return likeRepository.findById(id)
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
     }
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping
@@ -35,39 +26,24 @@ public class LikeController {
         return likeRepository.save(like);
     }
     @CrossOrigin(origins = "http://localhost:3000")
-    @PutMapping("/{id}")
-    public ResponseEntity<Like> updateLike(@RequestBody Like updatedLike, @PathVariable int id) {
-        return likeRepository.findById(id)
-                .map(like -> {
-                    like.setLike_id(updatedLike.getLike_id());
-                    like.setTweet_id(updatedLike.getTweet_id());
-                    like.setUser_id(updatedLike.getUser_id());
-                    like.setTimestamp(updatedLike.getTimestamp());
-                    likeRepository.save(like);
-                    return ResponseEntity.ok(like);
-                })
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    @GetMapping("/{userId}")
+    public List<Like> getLikesByUserId(@PathVariable(value = "userId") Integer userId) {
+        return likeRepository.findAll().stream()
+                .filter(like -> like.getUser_id() == userId)
+                .collect(Collectors.toList());
     }
-//    @CrossOrigin(origins = "http://localhost:3000")
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Void> deleteLike(@PathVariable int id) {
-//        if (likeRepository.existsById(id)) {
-//            likeRepository.deleteById(id);
-//            return ResponseEntity.ok().build();
-//        } else {
-//            return ResponseEntity.notFound().build();
-//        }
-//    }
+
     @CrossOrigin(origins = "http://localhost:3000")
-    @DeleteMapping("/user/{userId}")
-    public ResponseEntity<Void> deleteLikeByUserId(@PathVariable int userId) {
-        List<Like> likes = likeRepository.findByUserId(userId);
-        if (!likes.isEmpty()) {
-            likes.forEach(like -> likeRepository.deleteById(like.getLike_id()));
-            return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @DeleteMapping("/{userId}/{tweetId}")
+    public ResponseEntity<?> deleteLike(@PathVariable(value = "userId") Integer userId, @PathVariable(value = "tweetId") Integer tweetId) {
+        Like like = likeRepository.findAll().stream()
+                .filter(l -> l.getUser_id() == userId && l.getTweet_id() == tweetId)
+                .findFirst()
+                .orElseThrow();
+
+        likeRepository.delete(like);
+
+        return ResponseEntity.ok().build();
     }
 
 }

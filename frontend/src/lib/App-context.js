@@ -13,7 +13,7 @@ export const AppProvider = ({ children }) => {
   const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const [change, setChange] = useState(true);
   // Fetch tweets function
   const fetchTweets = async () => {
     const url = "http://localhost:8080/tweets";
@@ -66,10 +66,12 @@ export const AppProvider = ({ children }) => {
     fetchTweets();
     fetchUserData();
     fetchUserDetailData();
-  }, []);
+  }, [change]);
 
   return (
-    <AppContext.Provider value={{ tweets, userData, loading, error,userTweets }}>
+    <AppContext.Provider
+      value={{ tweets, userData, loading, error, userTweets, setChange , change}}
+    >
       {children}
     </AppContext.Provider>
   );

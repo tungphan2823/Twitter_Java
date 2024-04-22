@@ -13,19 +13,32 @@ public class Follower {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "track_id")
+    private int track_id;
     @Column(name = "follower_id")
-    private int follower_id;
+    private int followerId;
 
-    @Column(name = "following_id")
+
+    public int getFollowerId() {
+		return followerId;
+	}
+
+	public void setFollowerId(int followerId) {
+		this.followerId = followerId;
+	}
+
+	@Column(name = "following_id")
     private int following_id;
 
-    public int getFollower_id() {
-        return follower_id;
-    }
+    public int getTrack_id() {
+		return track_id;
+	}
 
-    public void setFollower_id(int follower_id) {
-        this.follower_id = follower_id;
-    }
+	public void setTrack_id(int track_id) {
+		this.track_id = track_id;
+	}
+
+
 
     public int getFollowing_id() {
         return following_id;

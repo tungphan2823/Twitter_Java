@@ -50,19 +50,16 @@ public class Like {
 		this.timestamp = timestamp;
 	}
 
-	  @ManyToOne
-	    @JoinColumn(name = "user_id", insertable = false, updatable = false)
-	    private User user;
-
-
-
-	    public User getUser() {
-	        return user;
-	    }
-
-	    public void setUser(User user) {
-	        this.user = user;
-	    }
-	    
+//	  @ManyToOne
+//	    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+//	    private User user;
+//	    public User getUser() {
+//	        return user;
+//	    }
+//
+//	    public void setUser(User user) {
+//	        this.user = user;
+//	    }
+//	    
 	    
 }

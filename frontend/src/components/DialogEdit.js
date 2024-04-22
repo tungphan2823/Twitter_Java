@@ -5,11 +5,12 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-
+import { AppContext } from "../lib/App-context";
+import { useContext } from "react";
 import TextField from "@mui/material/TextField";
 export default function EditDialog({ userData }) {
   const [open, setOpen] = React.useState(false);
-
+  const { setChange } = useContext(AppContext);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -25,7 +26,7 @@ export default function EditDialog({ userData }) {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-
+    setChange((prevChange) => !prevChange);
     const data = await response.json();
     return data;
   }

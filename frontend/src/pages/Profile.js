@@ -5,6 +5,8 @@ import FollowCard from "../components/FollowCard";
 import Post from "../components/Post";
 import React, { useState, useEffect } from "react";
 import { useAppContext } from "../lib/App-context";
+import { AppContext } from "../lib/App-context";
+import { useContext } from "react";
 const users = [
   {
     username: "markiplier",
@@ -25,6 +27,8 @@ const users = [
 ];
 
 const ProfilePage = () => {
+  const { change } = useContext(AppContext);
+
   const [tweets, setTweets] = useState([]);
   const [userData, setUserData] = useState([]);
   const params = useParams();
@@ -42,7 +46,7 @@ const ProfilePage = () => {
     };
 
     fetchData();
-  }, [params.userId]);
+  }, [params.userId, change]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -58,7 +62,7 @@ const ProfilePage = () => {
     };
 
     fetchData();
-  }, [params.userId]);
+  }, [params.userId, change]);
   // const { userTweets } = useAppContext();
   return (
     <div className="homePage">
