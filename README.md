@@ -24,9 +24,10 @@ Mini-Twitter is a simplified version of Twitter, designed to mimic some of the c
 2. Install dependencies for frontend and backend.
 3. Set up PostgreSQL database.
 4. Run the frontend and backend servers.
+##
+
 ![image](https://github.com/tungphan2823/Twitter_Java/assets/65490843/8996a8f4-9e94-46f3-baad-de29357ee22f)
 ![image](https://github.com/tungphan2823/Twitter_Java/assets/65490843/87550eeb-30cc-47ff-8d53-632c80d1d62a)
 
-## Contribution
-Contributions are welcome! Please follow the contribution guidelines.
+
 
