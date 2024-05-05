@@ -29,5 +29,7 @@ Mini-Twitter is a simplified version of Twitter, designed to mimic some of the c
 ![image](https://github.com/tungphan2823/Twitter_Java/assets/65490843/8996a8f4-9e94-46f3-baad-de29357ee22f)
 ![image](https://github.com/tungphan2823/Twitter_Java/assets/65490843/87550eeb-30cc-47ff-8d53-632c80d1d62a)
 
+## Learning Outcomes
 
+The student will learn concepts of Web services technology and master developing Web services using different technologies like XML-RPC and SOAP. During the course student will learn how to write multitier client-server applications, which communicate with each other over Internet. The course divides to two main parts: XML-RPC and SOAP. Student will learn how to write Web services, which are capable of carrying out various functionalities, like file download and upload and database communication. Student will also learn to write client applications with graphical user interface, which are capable of communicating with the Web service and handle the incoming and outgoing data. Student will also learn new techniques for handling XML documents and applying security on Web services.
 
